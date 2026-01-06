@@ -10,7 +10,18 @@ export default function App() {
       <ul>
         {tickets.map((ticket) => (
           <li key={ticket.id}>
-            {ticket.subject}
+            <strong>{ticket.subject}</strong>
+            {/* <p>Status: {ticket.status}</p> */}
+
+            <p
+              style={{
+                color:
+                  ticket.status === "Open" ? "red" : ticket.status === "In Progress" ? "orange" : "green",
+              }}
+            >
+              Status: {ticket.status}
+            </p>
+
           </li>
         ))}
       </ul>
