@@ -1,6 +1,7 @@
 import React from "react"
 import { useState } from "react"
 import { tickets } from "./data/tickets"
+import TicketItem from "./components/TicketItem"
 
 export default function App() {
   const [statusFilter, setStatusFilter] = useState("All")
@@ -20,22 +21,10 @@ export default function App() {
 
       <ul>
         {filteredTickets.map((ticket) => (
-          <li key={ticket.id}>
-            <strong>{ticket.subject}</strong>
-            {/* <p>Status: {ticket.status}</p> */}
-
-            <p
-              style={{
-                color:
-                  ticket.status === "Open" ? "red" : ticket.status === "In Progress" ? "orange" : "green",
-              }}
-            >
-              Status: {ticket.status}
-            </p>
-
-          </li>
+          <TicketItem key={ticket.id} ticket={ticket} />
         ))}
       </ul>
+
     </main>
   )
 }
