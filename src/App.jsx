@@ -8,6 +8,8 @@ import "./App.css"
 export default function App() {
   const [statusFilter, setStatusFilter] = useState("All")
   const [searchTerm, setSearchTerm] = useState("")
+  const [isLoading, setIsLoading] = useState(false)
+
   const filteredTickets = tickets.filter((ticket) => {
     const matchesStatus =
       statusFilter === "All" || ticket.status === statusFilter
@@ -34,7 +36,12 @@ export default function App() {
       
       <FilterBar setStatusFilter={setStatusFilter} />
 
-      <ul>
+      {isLoading ? (
+        <p>Loading tickets...</p>
+      ) : filteredTickets.length === 0 ? (
+        <p>No tickets found.</p>
+      ) : null}
+      <ul style={{ listStyle: "none", padding: 0 }}>
         {filteredTickets.map((ticket) => (
           <TicketItem key={ticket.id} ticket={ticket} />
         ))}

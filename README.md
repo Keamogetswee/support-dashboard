@@ -26,6 +26,6 @@ This project simulates how support teams can filter and search through customer 
 ## 🚀 Getting Started
 1. Clone the repository
    ```bash
-   git clone https://github.com/your-username/support-dashboard.git
+   git clone git@github.com:Keamogetswee/support-dashboard.git
 2. npm install
 3. npm run dev
