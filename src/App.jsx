@@ -2,6 +2,8 @@ import React from "react"
 import { useState } from "react"
 import { tickets } from "./data/tickets"
 import TicketItem from "./components/TicketItem"
+import FilterBar from "./components/FilterBar"
+import "./App.css"
 
 export default function App() {
   const [statusFilter, setStatusFilter] = useState("All")
@@ -17,7 +19,7 @@ export default function App() {
   
   
   return (
-    <main style={{ padding: "2rem" }}>
+    <main>
       <h1>Customer Support Dashboard</h1>
       <p>Internal tool for managing support tickets.</p>
 
@@ -30,12 +32,7 @@ export default function App() {
       />
 
       
-      <div style={{ marginBottom: "1rem" }}>
-        <button onClick={() => setStatusFilter("All")}>All</button>
-        <button onClick={() => setStatusFilter("Open")}>Open</button>
-        <button onClick={() => setStatusFilter("In Progress")}>In Progress</button>
-        <button onClick={() => setStatusFilter("Resolved")}>Resolved</button>
-      </div>
+      <FilterBar setStatusFilter={setStatusFilter} />
 
       <ul>
         {filteredTickets.map((ticket) => (
