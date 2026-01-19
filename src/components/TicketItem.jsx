@@ -1,11 +1,14 @@
-export default function TicketItem({ ticket }) {
+export default function TicketItem({ ticket, isSelected, onSelect }) {
   return (
     <li
+      onClick={onSelect}
       style={{
-        border: "1px solid #ddd",
+        border: "1px solid #000",
         borderRadius: "8px",
         padding: "1rem",
         marginBottom: "1rem",
+        cursor: "pointer",
+        backgroundColor: isSelected ? "#000000" : "black",
       }}
     >
       <strong>{ticket.subject}</strong>
@@ -23,6 +26,13 @@ export default function TicketItem({ ticket }) {
       >
         Status: {ticket.status}
       </p>
+
+      {isSelected && (
+        <div style={{ marginTop: "0.75rem", fontSize: "0.9rem" }}>
+          <p><strong>Description:</strong> {ticket.description}</p>
+          <p><strong>Priority:</strong> {ticket.priority || "Medium"}</p>
+        </div>
+      )}
     </li>
   )
 }
