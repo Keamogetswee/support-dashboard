@@ -4,6 +4,7 @@ import { tickets } from "./data/tickets"
 import TicketItem from "./components/TicketItem"
 import FilterBar from "./components/FilterBar"
 import "./App.css"
+import PriorityBadge from "./components/PriorityBadge"
 
 export default function App() {
   const [tickets, setTickets] = useState([])
@@ -41,6 +42,7 @@ export default function App() {
       })
 
       .then((data) => {
+        const priorities = ["Low", "Medium", "High"]
         const mappedTickets = data.map((post, index) => ({
           id: post.id,
           subject: subjects[index % subjects.length],
@@ -48,7 +50,7 @@ export default function App() {
           status: ["Open", "In Progress", "Resolved"][
             Math.floor(Math.random() * 3)
           ],
-          priority: ["Low", "Medium", "High"][Math.floor(Math.random() * 3)],
+          priority: priorities[Math.floor(Math.random() * priorities.length)],
         }))
 
         setTickets(mappedTickets)
@@ -85,6 +87,7 @@ export default function App() {
 
 
       <FilterBar setStatusFilter={setStatusFilter} />
+  
 
       {isLoading && <p>Loading tickets...</p>}
       {!isLoading && filteredTickets.length === 0 && <p>No tickets found.</p>}

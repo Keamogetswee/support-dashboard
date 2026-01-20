@@ -1,3 +1,5 @@
+import PriorityBadge from "./PriorityBadge"
+
 export default function TicketItem({ ticket, isSelected, onSelect }) {
   return (
     <li
@@ -11,7 +13,9 @@ export default function TicketItem({ ticket, isSelected, onSelect }) {
         backgroundColor: isSelected ? "#000000" : "black",
       }}
     >
-      <strong>{ticket.subject}</strong>
+       <strong>
+        {ticket.subject}<PriorityBadge priority={ticket.priority} />
+      </strong>
 
       <p
         style={{
