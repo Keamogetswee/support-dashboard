@@ -1,6 +1,6 @@
 import PriorityBadge from "./PriorityBadge"
 
-export default function TicketItem({ ticket, isSelected, onSelect }) {
+export default function TicketItem({ ticket, onSelect }) {
   return (
     <li
       onClick={onSelect}
@@ -10,11 +10,11 @@ export default function TicketItem({ ticket, isSelected, onSelect }) {
         padding: "1rem",
         marginBottom: "1rem",
         cursor: "pointer",
-        backgroundColor: isSelected ? "#000000" : "black",
+        backgroundColor: "#000",
       }}
     >
-       <strong>
-        {ticket.subject}<PriorityBadge priority={ticket.priority} />
+      <strong>
+        {ticket.subject} <PriorityBadge priority={ticket.priority} />
       </strong>
 
       <p
@@ -30,13 +30,6 @@ export default function TicketItem({ ticket, isSelected, onSelect }) {
       >
         Status: {ticket.status}
       </p>
-
-      {isSelected && (
-        <div style={{ marginTop: "0.75rem", fontSize: "0.9rem" }}>
-          <p><strong>Description:</strong> {ticket.description}</p>
-          <p><strong>Priority:</strong> {ticket.priority || "Medium"}</p>
-        </div>
-      )}
     </li>
   )
 }

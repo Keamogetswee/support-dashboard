@@ -12,8 +12,8 @@ export default function App() {
   const [searchTerm, setSearchTerm] = useState("")
   const [isLoading, setIsLoading] = useState(true)
   const [error, setError] = useState(null)
-  const [selectedTicketId, setSelectedTicketId] = useState(null)
   const [sortBy, setSortBy] = useState("none")
+  const [selectedTicket, setSelectedTicket] = useState(null)
 
   useEffect(() => {
   setIsLoading(true)
@@ -141,8 +141,7 @@ export default function App() {
           <TicketItem
             key={ticket.id}
             ticket={ticket}
-            isSelected={ticket.id === selectedTicketId}
-            onSelect={() => setSelectedTicketId(ticket.id === selectedTicketId ? null : ticket.id)}
+            onSelect={() => setSelectedTicket(ticket)}
           />
         ))}
       </ul>
