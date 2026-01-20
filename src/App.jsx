@@ -10,14 +10,23 @@ export default function App() {
   const [tickets, setTickets] = useState([])
   const [statusFilter, setStatusFilter] = useState("All")
   const [searchTerm, setSearchTerm] = useState("")
-  const [isLoading, setIsLoading] = useState(false)
+  const [isLoading, setIsLoading] = useState(true)
   const [error, setError] = useState(null)
   const [selectedTicketId, setSelectedTicketId] = useState(null)
   const [sortBy, setSortBy] = useState("none")
 
   useEffect(() => {
-    setIsLoading(true)
+  setIsLoading(true)
 
+  fetch("https://jsonplaceholder.typicode.com/posts?_limit=10")
+    .then((res) => {
+      if (!res.ok) {
+        throw new Error("Failed to fetch tickets")
+      }
+      return res.json()
+    })
+    .then((data) => {
+  setTimeout(() => {
     const subjects = [
       "Unable to reset password",
       "Payment failed at checkout",
@@ -34,34 +43,29 @@ export default function App() {
       "App crashes immediately after logging in.",
     ]
 
-    fetch("https://jsonplaceholder.typicode.com/posts?_limit=10")
-      .then((res) => {
-        if (!res.ok) {
-          throw new Error("Failed to fetch tickets")
-        }
-        return res.json()
-      })
+    const mappedTickets = data.map((post, index) => ({
+      id: post.id,
+      subject: subjects[index % subjects.length],
+      description: descriptions[index % descriptions.length],
+      status: ["Open", "In Progress", "Resolved"][
+        Math.floor(Math.random() * 3)
+      ],
+      priority: ["Low", "Medium", "High"][
+        Math.floor(Math.random() * 3)
+      ],
+    }))
 
-      .then((data) => {
-        const priorities = ["Low", "Medium", "High"]
-        const mappedTickets = data.map((post, index) => ({
-          id: post.id,
-          subject: subjects[index % subjects.length],
-          description: descriptions[index % descriptions.length],
-          status: ["Open", "In Progress", "Resolved"][
-            Math.floor(Math.random() * 3)
-          ],
-          priority: priorities[Math.floor(Math.random() * priorities.length)],
-        }))
+    setTickets(mappedTickets)
+  }, 2000) // ⏳ 2 second delay
+})
 
-        setTickets(mappedTickets)
-        setIsLoading(false)
-      })
-      .catch((err) => {
-        setError(err.message)
-        setIsLoading(false)
-      })
-  }, [])
+    .catch((err) => {
+      setError(err.message)
+    })
+    .finally(() => {
+      setIsLoading(false)
+    })
+}, [])
 
 
   const filteredTickets = tickets.filter((ticket) => {
@@ -104,13 +108,29 @@ export default function App() {
       </select>
 
       <FilterBar setStatusFilter={setStatusFilter} />
-  
-
-      {isLoading && <p>Loading tickets...</p>}
-      {!isLoading && filteredTickets.length === 0 && <p>No tickets found.</p>}
-
 
       <p>Showing <strong>{filteredTickets.length}</strong> ticket(s)</p>
+
+
+      {isLoading && <p>Loading tickets...</p>}
+      {error && <p style={{ color: "red" }}>{error}</p>}
+      {!isLoading && !error && tickets.length === 0 && (
+        <div
+          style={{
+            textAlign: "center",
+            marginTop: "2rem",
+            fontSize: "1.2rem",
+            padding: "2rem",
+            color: "#555", 
+          }}
+        >
+          <h3>No tickets yet</h3>
+          <p>You're all caught up. New support tickets will appear here.</p>
+
+        </div>
+        )}
+
+
       
 
       {error && <p style={{ color: "red" }}>{error}</p>}
