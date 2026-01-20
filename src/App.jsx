@@ -1,4 +1,4 @@
-import React from "react"
+import React, { use } from "react"
 import { useState, useEffect } from "react"
 import { tickets } from "./data/tickets"
 import TicketItem from "./components/TicketItem"
@@ -66,6 +66,17 @@ export default function App() {
         setIsLoading(false)
       })
   }, [])
+
+  useEffect(() => {
+    if (selectedTicket) {
+      document.body.style.overflow = "hidden"
+    } else {
+      document.body.style.overflow = "auto"
+    }
+    return () => {
+      document.body.style.overflow = "auto"
+    }
+  }, [selectedTicket])
 
 
   const filteredTickets = tickets.filter((ticket) => {
@@ -145,7 +156,7 @@ export default function App() {
       </ul>
 
       {selectedTicket && (
-        <div
+        <div className="modal"
           onClick={() => setSelectedTicket(null)}
           style={{
             position: "fixed",
@@ -187,9 +198,6 @@ export default function App() {
           </div>
         </div>
       )}
-
-
-
     </main>
   )
 }
