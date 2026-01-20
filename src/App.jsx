@@ -13,6 +13,7 @@ export default function App() {
   const [isLoading, setIsLoading] = useState(false)
   const [error, setError] = useState(null)
   const [selectedTicketId, setSelectedTicketId] = useState(null)
+  const [sortBy, setSortBy] = useState("none")
 
   useEffect(() => {
     setIsLoading(true)
@@ -71,6 +72,12 @@ export default function App() {
     return matchesStatus && matchesSearch
   })
 
+  const sortedTickets = [...filteredTickets]
+  if (sortBy === "priority") {
+    const priorityOrder = { High: 1, Medium: 2, Low: 3 }
+    sortedTickets.sort((a, b) => priorityOrder[a.priority] - priorityOrder[b.priority])
+  }
+
 
   return (
     <main>
@@ -85,6 +92,16 @@ export default function App() {
         style={{ marginBottom: "1rem", padding: "0.5rem" }}
       />
 
+      <select
+        value={sortBy}
+        onChange={(e) => setSortBy(e.target.value)}
+        style={{ marginLeft: "1rem", padding: "0.5rem" }}
+      >
+        <option value="none">No sorting</option>
+        <option value="priority">Sort by priority</option>
+      
+
+      </select>
 
       <FilterBar setStatusFilter={setStatusFilter} />
   
@@ -94,12 +111,13 @@ export default function App() {
 
 
       <p>Showing <strong>{filteredTickets.length}</strong> ticket(s)</p>
+      
 
       {error && <p style={{ color: "red" }}>{error}</p>}
 
       <ul style={{ listStyle: "none", padding: 0 }}>
 
-        {filteredTickets.map((ticket) => (
+        {sortedTickets.map((ticket) => (
           <TicketItem
             key={ticket.id}
             ticket={ticket}
@@ -108,6 +126,7 @@ export default function App() {
           />
         ))}
       </ul>
+      
 
     </main>
   )
