@@ -5,6 +5,7 @@ import TicketItem from "./components/TicketItem"
 import FilterBar from "./components/FilterBar"
 import "./App.css"
 import PriorityBadge from "./components/PriorityBadge"
+import StatsCards from "./components/StatsCards"
 
 export default function App() {
   const [tickets, setTickets] = useState([])
@@ -113,6 +114,8 @@ export default function App() {
     <main>
       <h1>Customer Support Dashboard</h1>
       <p>Internal tool for managing support tickets.</p>
+
+      <StatsCards tickets={tickets} />
 
       <input
         type="text"
