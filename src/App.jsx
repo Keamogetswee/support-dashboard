@@ -6,6 +6,7 @@ import FilterBar from "./components/FilterBar"
 import "./App.css"
 import PriorityBadge from "./components/PriorityBadge"
 import StatsCards from "./components/StatsCards"
+import Layout from "./components/Layout"
 
 export default function App() {
   const [tickets, setTickets] = useState([])
@@ -111,6 +112,7 @@ export default function App() {
 
 
   return (
+    <Layout>
     <main>
       <h1>Customer Support Dashboard</h1>
       <p>Internal tool for managing support tickets.</p>
@@ -224,5 +226,6 @@ export default function App() {
         </div>
       )}
     </main>
+    </Layout>
   )
 }
