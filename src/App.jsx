@@ -16,6 +16,8 @@ export default function App() {
   const [error, setError] = useState(null)
   const [sortBy, setSortBy] = useState("none")
   const [selectedTicket, setSelectedTicket] = useState(null)
+  const [currentPage, setCurrentPage] = useState(1)
+  const ticketsPerPage = 5
 
   useEffect(() => {
     setIsLoading(true)
@@ -95,6 +97,10 @@ export default function App() {
     }
   },[selectedTicket])
 
+  useEffect(() => {
+    setCurrentPage(1)
+  }, [statusFilter, searchTerm, sortBy])
+
 
   const filteredTickets = tickets.filter((ticket) => {
     const matchesStatus = statusFilter === "All" || ticket.status === statusFilter
@@ -109,6 +115,11 @@ export default function App() {
     const priorityOrder = { High: 1, Medium: 2, Low: 3 }
     sortedTickets.sort((a, b) => priorityOrder[a.priority] - priorityOrder[b.priority])
   }
+
+  const totalPages = Math.ceil(sortedTickets.length / ticketsPerPage)
+  const startIndex = (currentPage - 1) * ticketsPerPage
+  const endIndex = startIndex + ticketsPerPage
+  const paginatedTickets = sortedTickets.slice(startIndex, endIndex)
 
 
   return (
@@ -170,7 +181,7 @@ export default function App() {
 
       <ul style={{ listStyle: "none", padding: 0 }}>
 
-        {sortedTickets.map((ticket) => (
+        {paginatedTickets.map((ticket) => (
           <TicketItem
             key={ticket.id}
             ticket={ticket}
@@ -178,6 +189,47 @@ export default function App() {
           />
         ))}
       </ul>
+
+{totalPages > 1 && (
+  <div
+    style={{
+      display: "flex",
+      justifyContent: "center",
+      marginTop: "2rem",
+      gap: "0.5rem",
+    }}
+  >
+    <button
+      disabled={currentPage === 1}
+      onClick={() => setCurrentPage((p) => p - 1)}
+    >
+      Prev
+    </button>
+
+    {[...Array(totalPages)].map((_, index) => {
+      const page = index + 1
+      return (
+        <button
+          key={page}
+          onClick={() => setCurrentPage(page)}
+          style={{
+            fontWeight: currentPage === page ? "bold" : "normal",
+          }}
+        >
+          {page}
+        </button>
+      )
+    })}
+
+    <button
+      disabled={currentPage === totalPages}
+      onClick={() => setCurrentPage((p) => p + 1)}
+    >
+      Next
+    </button>
+  </div>
+)}
+
 
       {selectedTicket && (
         <div className="modal-overlay"
