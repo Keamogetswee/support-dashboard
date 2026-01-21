@@ -78,6 +78,21 @@ export default function App() {
     }
   }, [selectedTicket])
 
+  useEffect(() => {
+    if (!selectedTicket) return
+
+    function handleKeyDown(e) {
+      if (e.key === "Escape") {
+        setSelectedTicket(null)
+      }
+    }
+
+    window.addEventListener("keydown", handleKeyDown)
+    return () => {
+      window.removeEventListener("keydown", handleKeyDown)
+    }
+  },[selectedTicket])
+
 
   const filteredTickets = tickets.filter((ticket) => {
     const matchesStatus = statusFilter === "All" || ticket.status === statusFilter
@@ -120,7 +135,7 @@ export default function App() {
 
       <FilterBar setStatusFilter={setStatusFilter} />
 
-      <p>Showing <strong>{filteredTickets.length}</strong> ticket(s)</p>
+      <p>Showing <strong>{sortedTickets.length}</strong> ticket(s)</p>
 
 
       {isLoading && <p>Loading tickets...</p>}
@@ -135,10 +150,14 @@ export default function App() {
             color: "#555",
           }}
         >
-          <h3>No tickets yet</h3>
+          <h3>No new tickets</h3>
           <p>You're all caught up. New support tickets will appear here.</p>
 
         </div>
+      )}
+
+      {!isLoading && !error && tickets.length > 0 && sortedTickets.length === 0 && (
+        <p style={{marginTop: "2rem", color: "#777"}}>No tickets match your search filter.</p>
       )}
 
 
@@ -156,7 +175,7 @@ export default function App() {
       </ul>
 
       {selectedTicket && (
-        <div className="modal"
+        <div className="modal-overlay"
           onClick={() => setSelectedTicket(null)}
           style={{
             position: "fixed",
@@ -171,7 +190,10 @@ export default function App() {
             zIndex: 1000,
           }}
         >
-          <div
+          <div className="modal"
+          role="dialog"
+          aria-modal="true"
+          aria-label="Ticket details"
             onClick={(e) => e.stopPropagation()}
             style={{
               background: "#000",
