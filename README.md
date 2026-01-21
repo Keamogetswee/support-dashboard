@@ -1,31 +1,31 @@
-# Support Dashboard
+# 🎫 Customer Support Dashboard
 
-A simple internal customer support dashboard built with React.  
-This project simulates how support teams can filter and search through customer tickets.
+An internal customer support dashboard built with React to manage, filter, and prioritise support tickets.
 
-## ✨ Features
-- View a list of support tickets
-- Filter tickets by status (All, Open, In Progress, Resolved)
-- Search tickets by subject
-- Combined filter + search functionality
-- Clean, readable UI for internal use
+## 🚀 Features
+- Fetches ticket data from an external API
+- Search tickets by subject and description
+- Filter tickets by status
+- Sort tickets by priority
+- Expand tickets to view full details
+- Modal with keyboard support (ESC to close)
+- Loading, empty, and error states
+- Responsive and clean UI
 
-## 🛠️ Tech Stack
-- React
-- JavaScript (ES6+)
+## 🛠 Tech Stack
+- React (Hooks)
+- JavaScript (ES6)
 - HTML & CSS
-- Git & GitHub
+- Fetch API
 
-## 🧠 What I Learned
-- Managing component state using React hooks
-- Filtering and searching data using JavaScript
-- Combining multiple UI controls (filters + search)
-- Building reusable components
-- Writing clean, maintainable code
+## 🧠 What I Practiced
+- React state management
+- Conditional rendering
+- Side effects with `useEffect`
+- UX patterns used in real-world dashboards
+- Accessibility and keyboard interactions
 
-## 🚀 Getting Started
-1. Clone the repository
-   ```bash
-   git clone git@github.com:Keamogetswee/support-dashboard.git
-2. npm install
-3. npm run dev
+## ▶️ Running the project
+```bash
+npm install
+npm run dev
