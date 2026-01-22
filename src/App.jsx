@@ -122,6 +122,7 @@ export default function App() {
   const paginatedTickets = sortedTickets.slice(startIndex, endIndex)
 
 
+
   return (
     <Layout>
     <main>

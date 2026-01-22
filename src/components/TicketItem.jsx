@@ -2,7 +2,7 @@ import PriorityBadge from "./PriorityBadge"
 
 export default function TicketItem({ ticket, onSelect }) {
   return (
-    <li
+    <li className="ticket-item"
       onClick={onSelect}
       tabIndex={0}
       role="button"

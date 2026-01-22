@@ -52,3 +52,77 @@ li:hover {
 .modal {
   animation: fadeIn 0.25s ease-out;
 }
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.stat-card {
+  background: #141414;
+  border-radius: 14px;
+  padding: 1.25rem;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.35);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.stat-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 24px rgba(0,0,0,0.45);
+}
+
+.stat-header {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  opacity: 0.85;
+  margin-bottom: 0.5rem;
+}
+
+.stat-header span {
+  font-size: 1.1rem;
+}
+
+.stat-card h4 {
+  font-size: 0.85rem;
+  font-weight: 500;
+}
+
+.stat-value {
+  font-size: 2rem;
+  font-weight: 600;
+}
+
+/* Softer accent colors */
+.stat-card.open {
+  border-left: 4px solid #eab308;
+}
+
+.stat-card.progress {
+  border-left: 4px solid #38bdf8;
+}
+
+.stat-card.resolved {
+  border-left: 4px solid #4ade80;
+}
+
+.stat-card.high {
+  border-left: 4px solid #fb7185;
+}
+
+.ticket-item {
+  background: #121212;
+  border-radius: 10px;
+  padding: 1rem;
+  margin-bottom: 0.75rem;
+  cursor: pointer;
+  border: 1px solid #1f1f1f;
+  transition: background 0.2s ease, transform 0.15s ease;
+}
+
+.ticket-item:hover {
+  background: #181818;
+  transform: translateX(4px);
+}

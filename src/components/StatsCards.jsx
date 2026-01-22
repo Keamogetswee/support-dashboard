@@ -5,40 +5,31 @@ export default function StatsCards({ tickets }) {
   const resolved = tickets.filter(t => t.status === "Resolved").length
   const highPriority = tickets.filter(t => t.priority === "High").length
 
-  const cardStyle = {
-    padding: "1rem",
-    borderRadius: "12px",
-    background: "#111",
-    color: "#fff",
-    flex: 1,
-    minWidth: "150px"
-  }
-
   return (
-    <div style={{ display: "flex", gap: "1rem", marginBottom: "2rem", flexWrap: "wrap" }}>
-      <div style={cardStyle}>
+    <div className="stats-grid">
+      <div className="stat-card total">
         <h4>Total Tickets</h4>
-        <strong>{total}</strong>
+        <span className="stat-value">{total}</span>
       </div>
 
-      <div style={cardStyle}>
+      <div className="stat-card open">
         <h4>Open</h4>
-        <strong>{open}</strong>
+        <span className="stat-value">{open}</span>
       </div>
 
-      <div style={cardStyle}>
+      <div className="stat-card progress">
         <h4>In Progress</h4>
-        <strong>{inProgress}</strong>
+        <span className="stat-value">{inProgress}</span>
       </div>
 
-      <div style={cardStyle}>
+      <div className="stat-card resolved">
         <h4>Resolved</h4>
-        <strong>{resolved}</strong>
+        <span className="stat-value">{resolved}</span>
       </div>
 
-      <div style={cardStyle}>
+      <div className="stat-card high">
         <h4>High Priority</h4>
-        <strong>{highPriority}</strong>
+        <span className="stat-value">{highPriority}</span>
       </div>
     </div>
   )
