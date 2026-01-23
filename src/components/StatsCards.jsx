@@ -5,32 +5,26 @@ export default function StatsCards({ tickets }) {
   const resolved = tickets.filter(t => t.status === "Resolved").length
   const highPriority = tickets.filter(t => t.priority === "High").length
 
+  const cards = [
+    { label: "Total Tickets", value: total, color: "#6366f1" },
+    { label: "Open", value: open, color: "#38bdf8" },
+    { label: "In Progress", value: inProgress, color: "#fbbf24" },
+    { label: "Resolved", value: resolved, color: "#34d399" },
+    { label: "High Priority", value: highPriority, color: "#fb7185" },
+  ]
+
   return (
     <div className="stats-grid">
-      <div className="stat-card total">
-        <h4>Total Tickets</h4>
-        <span className="stat-value">{total}</span>
-      </div>
-
-      <div className="stat-card open">
-        <h4>Open</h4>
-        <span className="stat-value">{open}</span>
-      </div>
-
-      <div className="stat-card progress">
-        <h4>In Progress</h4>
-        <span className="stat-value">{inProgress}</span>
-      </div>
-
-      <div className="stat-card resolved">
-        <h4>Resolved</h4>
-        <span className="stat-value">{resolved}</span>
-      </div>
-
-      <div className="stat-card high">
-        <h4>High Priority</h4>
-        <span className="stat-value">{highPriority}</span>
-      </div>
+      {cards.map(card => (
+        <div className="stat-card-light" key={card.label}>
+          <span
+            className="stat-accent"
+            style={{ backgroundColor: card.color }}
+          />
+          <div className="stat-value">{card.value}</div>
+          <div className="stat-label">{card.label}</div>
+        </div>
+      ))}
     </div>
   )
 }

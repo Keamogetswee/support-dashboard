@@ -12,12 +12,12 @@ export default function TicketItem({ ticket, onSelect }) {
         }
       }}
       style={{
-        border: "1px solid #000",
+        border: "1px solid #CBCBCB",
         borderRadius: "8px",
         padding: "1rem",
         marginBottom: "1rem",
         cursor: "pointer",
-        backgroundColor: "#000",
+        backgroundColor: "#fff",
         transition: "transform 0.15s ease, box-shadow 0.15s ease",
         outline: "none",
       }}
@@ -46,10 +46,10 @@ export default function TicketItem({ ticket, onSelect }) {
           marginTop: "0.5rem",
           color:
             ticket.status === "Open"
-              ? "red"
+              ? "grey"
               : ticket.status === "In Progress"
-                ? "orange"
-                : "green",
+                ? "grey"
+                : "grey",
         }}
       >
         Status: {ticket.status}

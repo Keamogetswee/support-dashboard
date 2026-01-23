@@ -3,8 +3,8 @@ export default function Sidebar() {
     <aside
       style={{
         width: "220px",
-        background: "#0f0f0f",
-        color: "#fff",
+        background: "#f7f7f7",
+        color: "black",
         padding: "1.5rem",
         height: "100vh",
         position: "fixed",

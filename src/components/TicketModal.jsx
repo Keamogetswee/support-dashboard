@@ -32,9 +32,11 @@ const overlayStyle = {
 }
 
 const modalStyle = {
-  background: "#fff",
+  background: "#ffffff",
+  borderRadius: "16px",
   padding: "2rem",
-  borderRadius: "10px",
-  maxWidth: "500px",
+  maxWidth: "520px",
   width: "90%",
+  boxShadow: "0 20px 40px rgba(0,0,0,0.15)"
+
 }

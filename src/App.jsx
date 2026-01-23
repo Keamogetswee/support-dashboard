@@ -125,7 +125,12 @@ export default function App() {
 
   return (
     <Layout>
-    <main>
+    <main style={{
+    background: "#f7f7f7",
+    padding: "2rem",
+    borderRadius: "16px",
+    minHeight: "100vh",
+  }}>
       <h1>Customer Support Dashboard</h1>
       <p>Internal tool for managing support tickets.</p>
 
@@ -254,7 +259,7 @@ export default function App() {
           aria-label="Ticket details"
             onClick={(e) => e.stopPropagation()}
             style={{
-              background: "#000",
+              background: "#CBCBCB",
               border: "2px solid aqua",
               padding: "2rem",
               borderRadius: "8px",

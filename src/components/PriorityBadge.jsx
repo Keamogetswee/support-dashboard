@@ -13,7 +13,7 @@ export default function PriorityBadge({ priority }) {
         borderRadius: "12px",
         fontSize: "0.75rem",
         fontWeight: "600",
-        color: "white",
+        color: "black",
         backgroundColor: colors[priority],
       }}
     >
