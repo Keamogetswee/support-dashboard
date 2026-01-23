@@ -136,6 +136,7 @@ export default function App() {
 
       <StatsCards tickets={tickets} />
 
+    <div className="toolbar-actions">
       <input
         type="text"
         placeholder="Search..."
@@ -156,6 +157,7 @@ export default function App() {
       </select>
 
       <FilterBar setStatusFilter={setStatusFilter} />
+    </div>
 
       <p>Showing <strong>{sortedTickets.length}</strong> ticket(s)</p>
 
